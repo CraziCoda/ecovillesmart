@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
 //Import Sequlize object
-const sequelize = require("./sequilize");
+const sequelize = require("./sequelize");
 
 const User = sequelize.define("user", {
   id: {
@@ -12,7 +12,7 @@ const User = sequelize.define("user", {
   },
 
   username: { type: Sequelize.STRING, allowNull: false },
-  password: { type: Sequelize.STRING, allowNull: false },
+  password: { type: Sequelize.STRING, allowNull: false },                      
   isAdmin: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
   localSMSPoints: { type: Sequelize.DOUBLE, allowNull: true, defaultValue: 0 },
   intSMSPoints: { type: Sequelize.DOUBLE, allowNull: true, defaultValue: 0 },
@@ -37,6 +37,10 @@ const SMS = sequelize.define("sms", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  isDraft: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  }
 });
 
 const Contacts = sequelize.define("contacts", {
@@ -51,9 +55,9 @@ const Contacts = sequelize.define("contacts", {
     allowNull: false,
   },
   contacts: {
-    type: Sequelize.ARRAY,
-    defaultValue: []
+    type: Sequelize.ARRAY(Sequelize.INTEGER),
   }
 });
 
-module.exports = User;
+module.exports = {User, SMS, Contacts};
+ 
