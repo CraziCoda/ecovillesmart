@@ -1,32 +1,25 @@
-const Sequelize = require("sequelize");
-
+const { Sequelize, DataTypes } = require("sequelize");
+const { STRING, BOOLEAN, BLOB, INTEGER, DOUBLE, ARRAY } = DataTypes;
 //Import Sequlize object
 const sequelize = require("./sequelize");
 
 const User = sequelize.define("user", {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
-  },
-
-  username: { type: Sequelize.STRING, allowNull: false },
-  password: { type: Sequelize.STRING, allowNull: false },                      
-  isAdmin: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
-  localSMSPoints: { type: Sequelize.DOUBLE, allowNull: true, defaultValue: 0 },
-  intSMSPoints: { type: Sequelize.DOUBLE, allowNull: true, defaultValue: 0 },
+  firstname: { type: STRING, allowNull: false },
+  lastname: { type: STRING, allowNull: false },
+  email: { type: STRING, allowNull: false },
+  password: { type: STRING, allowNull: false },
+  isAdmin: { type: BOOLEAN, allowNull: false, defaultValue: false },
+  localsms_units: { type: DOUBLE, allowNull: true, defaultValue: 0 },
+  intsms_units: { type: DOUBLE, allowNull: true, defaultValue: 0 },//international sms units
 });
 
+const Admin = sequelize.define("admin", {
+
+})
+
 const SMS = sequelize.define("sms", {
-  id: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  },
   senderID: {
-    type: Sequelize.INTEGER,
+    type: STRING,
     allowNull: false,
   },
   message: {
@@ -44,12 +37,6 @@ const SMS = sequelize.define("sms", {
 });
 
 const Contacts = sequelize.define("contacts", {
-  id: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  },
   owner: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -59,5 +46,4 @@ const Contacts = sequelize.define("contacts", {
   }
 });
 
-module.exports = {User, SMS, Contacts};
- 
+module.exports = { User, SMS, Contacts };
